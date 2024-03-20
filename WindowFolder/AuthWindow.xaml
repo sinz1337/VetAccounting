@@ -1,0 +1,168 @@
+﻿<Window x:Class="VetAccounting.WindowFolder.AuthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VetAccounting.WindowFolder"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        mc:Ignorable="d"
+        Title="Авотризация" Height="560" Width="370"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="{x:Null}"
+        KeyDown="Window_KeyDown"
+        Loaded="Window_Loaded"
+        Icon="/ResourseFolder/ImageFolder/Logo.png">
+    <Border Style="{StaticResource BorderBack}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="VetAccounting"
+                   Grid.Column="1"
+                   Grid.Row="1"
+                   Style="{StaticResource LabelLogo}"/>
+
+            <materialDesign:PackIcon Kind="Close" 
+                                     Width="24"
+                                     Height="24"
+                                     Grid.Column="1"
+                                     Grid.Row="1"
+                                     HorizontalAlignment="Right"
+                                     Cursor="Hand"
+                                     MouseLeftButtonDown="PackIcon_MouseLeftButtonDown"
+                                     Foreground="#F5CB5C">
+                <materialDesign:PackIcon.ToolTip>
+                    <ToolTip Content="Закрыть"
+                             Style="{StaticResource ToolTip}"/>
+                </materialDesign:PackIcon.ToolTip>
+            </materialDesign:PackIcon>
+
+            <Line Grid.Row="1"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="3"
+                  X1="370" Y1="0"
+                  Stroke="#F5CB5C"
+                  VerticalAlignment="Bottom"
+                  StrokeThickness="3"/>
+
+            <TextBox x:Name="LoginTB"
+                     Grid.Column="1" Grid.Row="3"
+                     Height="56"
+                     Width="303"
+                     Padding="13"
+                     BorderBrush="#F5CB5C"
+                     BorderThickness="2"
+                     materialDesign:HintAssist.Hint="Логин"    
+                     materialDesign:HintAssist.FloatingOffset="7,-30"
+                     materialDesign:HintAssist.Background="#333533"
+                     materialDesign:HintAssist.Foreground="#F5CB5C"
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                     Style="{StaticResource TextBox}">
+                <TextBox.Resources>
+                    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#F5CB5C"/>
+                </TextBox.Resources>
+            </TextBox>
+
+            <PasswordBox x:Name="PasswordPB"
+                         Grid.Column="1" Grid.Row="5"
+                         Height="56"
+                         Width="303"
+                         BorderBrush="#F5CB5C"
+                         BorderThickness="2"
+                         Padding="13"
+                         materialDesign:HintAssist.Hint="Пароль"    
+                         materialDesign:HintAssist.FloatingOffset="7,-30"
+                         materialDesign:HintAssist.Background="#333533"
+                         materialDesign:HintAssist.Foreground="#F5CB5C"
+                         materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                         Style="{StaticResource PasswordBox}">
+                <PasswordBox.Resources>
+                    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#F5CB5C"/>
+                </PasswordBox.Resources>
+            </PasswordBox>
+
+            <Grid Grid.Column="1"
+                  Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="CapchaTB"
+                     Grid.Column="1"
+                     Width="155"
+                     FontSize="18"
+                     BorderBrush="#F5CB5C"
+                     BorderThickness="2"
+                     materialDesign:HintAssist.Hint="Капча"
+                     materialDesign:HintAssist.FloatingOffset="7,-30"
+                     materialDesign:HintAssist.Background="#333533"
+                     materialDesign:HintAssist.Foreground="#F5CB5C"
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                     Style="{StaticResource TextBox}">
+                    <TextBox.Resources>
+                        <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#F5CB5C"/>
+                    </TextBox.Resources>
+                </TextBox>
+
+                <WindowsFormsHost>
+                    <forms:PictureBox x:Name="CapchaPB"
+                                      Cursor="Hand"
+                                      Click="CapchaPB_Click"/>
+                </WindowsFormsHost>
+            </Grid>
+
+            <Label Content="Нажмите на капчку, чтобы обновить"
+                   Grid.Row="8"
+                   Grid.Column="1"
+                   FontSize="10"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   Style="{StaticResource NormalLabel}"/>
+
+            <Button x:Name="LoginBtn"
+                    Grid.Column="1" Grid.Row="9"
+                    Content="Вход"
+                    Width="243" Height="40"
+                    VerticalAlignment="Top"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    Style="{StaticResource Button}"
+                    Click="LoginBtn_Click"/>
+
+            <CheckBox x:Name="StayInCB"
+                      Content="Не выходить"
+                      Grid.Column="1"
+                      Grid.Row="9"
+                      VerticalAlignment="Top"
+                      Margin="0,45,0,0"
+                      materialDesign:CheckBoxAssist.CheckBoxSize="20"
+                      Style="{StaticResource CheckBox}">
+                <CheckBox.Resources>
+                    <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" 
+                                     Color="#F5CB5C"/>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" 
+                                     Color="#F5CB5C"/>
+                </CheckBox.Resources>
+            </CheckBox>
+        </Grid>
+    </Border>
+</Window>

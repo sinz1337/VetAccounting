@@ -1,0 +1,117 @@
+﻿<Page x:Class="VetAccounting.PageFolder.EditConsumablePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VetAccounting.PageFolder"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="1010" d:DesignWidth="1739"
+      Title="Изменение расходных материалов">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="NameTB"
+                     Height="70"
+                     Width="500"
+                     Padding="13"
+                     BorderBrush="#242423"
+                     BorderThickness="2"
+                     Foreground="#242423"
+                     CaretBrush="#242423"
+                     materialDesign:HintAssist.Hint="Название"    
+                     materialDesign:HintAssist.FloatingOffset="7,-30"
+                     materialDesign:HintAssist.Background="#E8EDDF"
+                     materialDesign:HintAssist.Foreground="#242423"
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                     Style="{StaticResource TextBox}">
+            <TextBox.Resources>
+                <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#242423"/>
+            </TextBox.Resources>
+        </TextBox>
+
+        <TextBox x:Name="ManufactureTB"
+                     Grid.Row="1"
+                     Height="70"
+                     Width="500"
+                     Padding="13"
+                     BorderBrush="#242423"
+                     BorderThickness="2"
+                     Foreground="#242423"
+                     CaretBrush="#242423"
+                     materialDesign:HintAssist.Hint="Производитель"    
+                     materialDesign:HintAssist.FloatingOffset="7,-30"
+                     materialDesign:HintAssist.Background="#E8EDDF"
+                     materialDesign:HintAssist.Foreground="#242423"
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                     Style="{StaticResource TextBox}">
+            <TextBox.Resources>
+                <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#242423"/>
+            </TextBox.Resources>
+        </TextBox>
+
+        <TextBox x:Name="QantityTB"
+                     Grid.Row="2"
+                     Height="70"
+                     Width="500"
+                     Padding="13"
+                     BorderBrush="#242423"
+                     BorderThickness="2"
+                     Foreground="#242423"
+                     CaretBrush="#242423"
+                     materialDesign:HintAssist.Hint="Количество"    
+                     materialDesign:HintAssist.FloatingOffset="7,-30"
+                     materialDesign:HintAssist.Background="#E8EDDF"
+                     materialDesign:HintAssist.Foreground="#242423"
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                     Style="{StaticResource TextBox}">
+            <TextBox.Resources>
+                <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#242423"/>
+            </TextBox.Resources>
+        </TextBox>
+
+        <TextBox x:Name="RemainsTB"
+                     Grid.Row="3"
+                     Height="70"
+                     Width="500"
+                     Padding="13"
+                     BorderBrush="#242423"
+                     BorderThickness="2"
+                     Foreground="#242423"
+                     CaretBrush="#242423"
+                     materialDesign:HintAssist.Hint="Остаток"    
+                     materialDesign:HintAssist.FloatingOffset="7,-30"
+                     materialDesign:HintAssist.Background="#E8EDDF"
+                     materialDesign:HintAssist.Foreground="#242423"
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                     Style="{StaticResource TextBox}">
+            <TextBox.Resources>
+                <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#242423"/>
+            </TextBox.Resources>
+        </TextBox>
+
+        <Button x:Name="SaveBtn"
+                Grid.Row="4"
+                Height="70"
+                Width="500"
+                Content="Сохранить"
+                FontSize="35"
+                Background="#242423"
+                Foreground="#F5CB5C"
+                materialDesign:ButtonAssist.CornerRadius="35"
+                Style="{StaticResource Button}"
+                Click="SaveBtn_Click"/>
+    </Grid>
+</Page>
