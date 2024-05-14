@@ -12,9 +12,11 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
@@ -22,27 +24,23 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="TypeTB"
-                     Height="70"
-                     Width="500"
-                     Padding="13"
-                     BorderBrush="#242423"
-                     BorderThickness="2"
-                     Foreground="#242423"
-                     CaretBrush="#242423"
-                     materialDesign:HintAssist.Hint="Тип"    
-                     materialDesign:HintAssist.FloatingOffset="7,-30"
-                     materialDesign:HintAssist.Background="#E8EDDF"
-                     materialDesign:HintAssist.Foreground="#242423"
-                     materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
-                     Style="{StaticResource TextBox}">
-            <TextBox.Resources>
-                <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#242423"/>
-            </TextBox.Resources>
-        </TextBox>
+        <ComboBox x:Name="TypeCB"
+                  Grid.Row="1"
+                  SelectedItem="{Binding Staff}"
+                  SelectedValuePath="IdType"
+                  DisplayMemberPath="NameType"
+                  IsEnabled="True"
+                  BorderBrush="#242423"
+                  Height="70"
+                  Width="500"
+                  materialDesign:HintAssist.Hint="Тип"
+                  materialDesign:HintAssist.Background="#E8EDDF"
+                  materialDesign:HintAssist.FloatingOffset="7,-30"
+                  materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                  Style="{StaticResource ComboBox}"/>
 
         <TextBox x:Name="ProviderTB"
-                     Grid.Row="1"
+                     Grid.Row="2"
                      Height="70"
                      Width="500"
                      Padding="13"
@@ -62,7 +60,7 @@
         </TextBox>
 
         <TextBox x:Name="CostTB"
-                     Grid.Row="2"
+                     Grid.Row="3"
                      Height="70"
                      Width="500"
                      Padding="13"
@@ -81,8 +79,43 @@
             </TextBox.Resources>
         </TextBox>
 
+        <TextBox x:Name="NumberTB"
+                     Grid.Row="4"
+                     Height="70"
+                     Width="500"
+                     Padding="13"
+                     BorderBrush="#242423"
+                     BorderThickness="2"
+                     Foreground="#242423"
+                     CaretBrush="#242423"
+                     materialDesign:HintAssist.Hint="Номер телефона водителя"    
+                     materialDesign:HintAssist.FloatingOffset="7,-30"
+                     materialDesign:HintAssist.Background="#E8EDDF"
+                     materialDesign:HintAssist.Foreground="#242423"
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                     Style="{StaticResource TextBox}" Cursor="">
+            <TextBox.Resources>
+                <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#242423"/>
+            </TextBox.Resources>
+        </TextBox>
+
+        <ComboBox x:Name="StaffCB"
+                  Grid.Row="5"
+                  SelectedItem="{Binding Staff}"
+                  SelectedValuePath="IdStaff"
+                  DisplayMemberPath="SurnameStaff"
+                  IsEnabled="True"
+                  BorderBrush="#242423"
+                  Height="70"
+                  Width="500"
+                  materialDesign:HintAssist.Hint="Сотрудник"
+                  materialDesign:HintAssist.Background="#E8EDDF"
+                  materialDesign:HintAssist.FloatingOffset="7,-30"
+                  materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                  Style="{StaticResource ComboBox}"/>
+
         <Button x:Name="AddBtn"
-                Grid.Row="3"
+                Grid.Row="6"
                 Height="70"
                 Width="500"
                 Content="Добавить"
@@ -92,6 +125,5 @@
                 materialDesign:ButtonAssist.CornerRadius="35"
                 Style="{StaticResource Button}"
                 Click="AddBtn_Click"/>
-
     </Grid>
 </Page>

@@ -91,14 +91,6 @@
         <Setter Property="Foreground" Value="#F5CB5C"/>
     </Style>
 
-    <!--ComboBox-->
-    <Style TargetType="ComboBox"
-           x:Key="Combobox"
-           BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
-        <Setter Property="FontFamily" Value="SF Pro Display"/>
-        <Setter Property="FontSize" Value="18"/>
-    </Style>
-    
     <!--TextBlock-->
     <Style TargetType="TextBlock"
            x:Key="TextBlock"
@@ -106,6 +98,25 @@
         <Setter Property="FontFamily" Value="SF Pro Display"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="#242423"/>
+    </Style>
+    
+    <!--DatePicker-->
+    <Style TargetType="DatePicker"
+           x:Key="DatePicker"
+           BasedOn="{StaticResource MaterialDesignOutlinedDatePicker}">
+        <Setter Property="FontFamily" Value="SF Pro Display"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="#242423"/>
+    </Style>
+    
+    <!--ComboBox-->
+    <Style TargetType="ComboBox"
+           x:Key="ComboBox"
+           BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
+        <Setter Property="FontFamily" Value="SF Pro Display"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Foreground" Value="#242423"/>
+        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
 </ResourceDictionary>

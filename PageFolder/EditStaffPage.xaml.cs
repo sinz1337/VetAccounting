@@ -19,43 +19,43 @@ using VetAccounting.DataFolder;
 namespace VetAccounting.PageFolder
 {
     /// <summary>
-    /// Логика взаимодействия для EditConsumablePage.xaml
+    /// Логика взаимодействия для EditStaffPage.xaml
     /// </summary>
-    public partial class EditConsumablePage : Page
+    public partial class EditStaffPage : Page
     {
         public string selectedFileName = "";
         byte[] Photo;
         bool IsPhoto;
-        Consumables consumables = new Consumables();
-        public EditConsumablePage(Consumables consumables)
+        Staff staff = new Staff();
+        Role role = new Role();
+        public EditStaffPage(Staff staff)
         {
             InitializeComponent();
-            DataContext = consumables;
-            this.consumables.IdConsumables = consumables.IdConsumables;
-            NameTB.Text = consumables.NameConsumables;
-            ManufactureTB.Text = consumables.ManufacturerConsumables;
-            QantityTB.Text = consumables.QuantityConsumables;
-            RemainsTB.Text = consumables.RemainsConsumables;
-            InfoTB.Text = consumables.InfoConsumables;
-            SizeTB.Text = consumables.SizeConsumables;
-            PhotoImg.ImageSource = ImageClass.ConvertByteArrayToImage(consumables.PhotoConsumables);
+            DataContext = staff;
+            this.staff.IdStaff = staff.IdStaff;
+            NameTB.Text = staff.NameStaff;
+            SurnameTB.Text = staff.SurnameStaff;
+            MiddleNameTB.Text = staff.MiddleNameStaff;
+            NumberTB.Text = staff.NumberStaff;
+            RoleCB.ItemsSource = DBEntities.GetContext().Role.ToList();
+            PhotoImg.ImageSource = ImageClass.ConvertByteArrayToImage(staff.PhotoStaff);
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                consumables = DBEntities.GetContext().Consumables.FirstOrDefault(c => c.IdConsumables == consumables.IdConsumables);
-                consumables.NameConsumables = NameTB.Text;
-                consumables.ManufacturerConsumables = ManufactureTB.Text;
-                consumables.RemainsConsumables = RemainsTB.Text;
-                consumables.QuantityConsumables = QantityTB.Text;
-                consumables.InfoConsumables = InfoTB.Text;
-                consumables.SizeConsumables = SizeTB.Text;
-                consumables.PhotoConsumables = ImageClass.ConvertImageToByteArray(selectedFileName);
+                staff = DBEntities.GetContext().Staff.FirstOrDefault(c => c.IdStaff == staff.IdStaff);
+                role = DBEntities.GetContext().Role.FirstOrDefault(c => c.IdRole == role.IdRole);
+                staff.NameStaff = NameTB.Text;
+                staff.SurnameStaff = SurnameTB.Text;
+                staff.MiddleNameStaff = MiddleNameTB.Text;
+                staff.NumberStaff = NumberTB.Text;
+                staff.IdRole = Int32.Parse(RoleCB.SelectedValue.ToString());
+                staff.PhotoStaff = ImageClass.ConvertImageToByteArray(selectedFileName);
                 DBEntities.GetContext().SaveChanges();
                 MBClass.InfoMB("Информация успешно отредактирована");
-                NavigationService.Navigate(new ConsumablesPage());
+                NavigationService.Navigate(new StaffPage());
             }
             catch (Exception ex)
             {
@@ -72,7 +72,6 @@ namespace VetAccounting.PageFolder
         {
             try
             {
-
                 OpenFileDialog op = new OpenFileDialog();
                 op.InitialDirectory = "";
                 op.Filter = "All support graphics|*.jpg;*.jpeg;*.png|" +
@@ -82,8 +81,8 @@ namespace VetAccounting.PageFolder
                 if (op.ShowDialog() == true)
                 {
                     selectedFileName = op.FileName;
-                    consumables.PhotoConsumables = ImageClass.ConvertImageToByteArray(selectedFileName);
-                    PhotoImg.ImageSource = ImageClass.ConvertByteArrayToImage(consumables.PhotoConsumables);
+                    staff.PhotoStaff = ImageClass.ConvertImageToByteArray(selectedFileName);
+                    PhotoImg.ImageSource = ImageClass.ConvertByteArrayToImage(staff.PhotoStaff);
                     PhotoLB.Content = "";
                 }
 

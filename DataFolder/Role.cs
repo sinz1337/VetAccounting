@@ -12,18 +12,21 @@ namespace VetAccounting.DataFolder
     using System;
     using System.Collections.Generic;
     
-    public partial class Type
+    public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Type()
+        public Role()
         {
-            this.Purchase = new HashSet<Purchase>();
+            this.Staff = new HashSet<Staff>();
+            this.User = new HashSet<User>();
         }
     
-        public int IdType { get; set; }
-        public string NameType { get; set; }
+        public int IdRole { get; set; }
+        public string NameRole { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Purchase> Purchase { get; set; }
+        public virtual ICollection<Staff> Staff { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> User { get; set; }
     }
 }

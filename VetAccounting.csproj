@@ -82,6 +82,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ClassFolder\GVClass.cs" />
+    <Compile Include="ClassFolder\ImageClass.cs" />
     <Compile Include="ClassFolder\MBClass.cs" />
     <Compile Include="DataFolder\Consumables.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
@@ -102,10 +104,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataFolder\InfoConsumables.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataFolder\InfoMedicines.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataFolder\Medicines.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataFolder\Purchase.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataFolder\Role.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataFolder\Staff.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataFolder\sysdiagrams.cs">
@@ -126,6 +140,9 @@
     <Compile Include="PageFolder\AddPurchasePage.xaml.cs">
       <DependentUpon>AddPurchasePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFolder\AddStaffPage.xaml.cs">
+      <DependentUpon>AddStaffPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFolder\ConsumablesPage.xaml.cs">
       <DependentUpon>ConsumablesPage.xaml</DependentUpon>
     </Compile>
@@ -135,11 +152,29 @@
     <Compile Include="PageFolder\EditMedecinePage.xaml.cs">
       <DependentUpon>EditMedecinePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFolder\EditStaffPage.xaml.cs">
+      <DependentUpon>EditStaffPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFolder\MedicinePage.xaml.cs">
       <DependentUpon>MedicinePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFolder\PhotoConsumablesPage.xaml.cs">
+      <DependentUpon>PhotoConsumablesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\PhotoMedicinePage.xaml.cs">
+      <DependentUpon>PhotoMedicinePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\PhotoStaffPage.xaml.cs">
+      <DependentUpon>PhotoStaffPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFolder\PurchasePage.xaml.cs">
       <DependentUpon>PurchasePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\StaffPage.xaml.cs">
+      <DependentUpon>StaffPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowFolder\AdminWindow.xaml.cs">
+      <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowFolder\AuthWindow.xaml.cs">
       <DependentUpon>AuthWindow.xaml</DependentUpon>
@@ -195,6 +230,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageFolder\AddStaffPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFolder\ConsumablesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -207,7 +246,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageFolder\EditStaffPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFolder\MedicinePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFolder\PhotoConsumablesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFolder\PhotoMedicinePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFolder\PhotoStaffPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -215,7 +270,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageFolder\StaffPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourseFolder\Dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowFolder\AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,6 +292,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ResourseFolder\ImageFolder\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="DataFolder\DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBModel.edmx</DependentUpon>
@@ -239,12 +308,6 @@
       <DependentUpon>DBModel.edmx</DependentUpon>
       <LastGenOutput>DBModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ResourseFolder\ImageFolder\Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />

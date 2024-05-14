@@ -15,9 +15,14 @@ namespace VetAccounting.DataFolder
     public partial class Purchase
     {
         public int IdPurchase { get; set; }
-        public string TypePurchase { get; set; }
         public string ProvidePurchaser { get; set; }
         public string CostPurchase { get; set; }
         public string StatysPurchase { get; set; }
+        public string NumberProvidePurchase { get; set; }
+        public int IdStaff { get; set; }
+        public int IdType { get; set; }
+    
+        public virtual Staff Staff { get; set; }
+        public virtual Type Type { get; set; }
     }
 }

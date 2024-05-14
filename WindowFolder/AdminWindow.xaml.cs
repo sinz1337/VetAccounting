@@ -17,29 +17,19 @@ using VetAccounting.PageFolder;
 namespace VetAccounting.WindowFolder
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для AdminWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AdminWindow : Window
     {
-        public MainWindow()
+        public AdminWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new MedicinePage());
+            MainFrame.Navigate(new StaffPage());
         }
 
-        private void Medicine_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Staff_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MainFrame.Navigate(new MedicinePage());
-        }
-
-        private void Consumables_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            MainFrame.Navigate(new ConsumablesPage());
-        }
-
-        private void Purchase_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            MainFrame.Navigate(new PurchasePage());
+            MainFrame.Navigate(new StaffPage());
         }
 
         private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -26,7 +26,7 @@ namespace VetAccounting.PageFolder
         {
             InitializeComponent();
             ListLB.ItemsSource = DBEntities.GetContext()
-                .Purchase.ToList().OrderBy(a => a.TypePurchase);
+                .Purchase.ToList().OrderBy(a => a.CostPurchase);
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)

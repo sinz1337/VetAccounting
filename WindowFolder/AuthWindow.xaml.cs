@@ -26,7 +26,6 @@ namespace VetAccounting.WindowFolder
         public AuthWindow()
         {
             InitializeComponent();
-            StayInCB.IsEnabled = false;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -56,44 +55,54 @@ namespace VetAccounting.WindowFolder
         }
 
         int k = 0;
-        private async void LoginBtn_Click(object sender, RoutedEventArgs e)
+        private  void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (CapchaTB.Text == text)
-            {
-                var user = DBEntities.GetContext()
-                        .User
-                        .FirstOrDefault(u => u.LoginUser == LoginTB.Text);
+            new MainWindow().Show();
+            //if (CapchaTB.Text == text)
+            //{
+            //    var user = DBEntities.GetContext()
+            //            .User
+            //            .FirstOrDefault(u => u.LoginUser == LoginTB.Text);
 
-                if (PasswordPB.Password != user.PasswordUser && PasswordPB.IsEnabled)
-                {
-                    k++;
-                    if (k == 3)
-                    {
-                        PasswordPB.IsEnabled = false;
-                        await Task.Delay(10000);
-                        PasswordPB.IsEnabled = true;
-                        k = 0;
-                    }
-                    else
-                    {
-                        MBClass.ErrorMB("Неправильный логин или пароль");
-                    }
-                }
-                else
-                {
-                    MBClass.InfoMB("Добро пожаловать!");
-                    k = 0;
-                    new MainWindow().Show();
-                    this.Close();
-                }
-            }
-            else
-            {
-                MBClass.ErrorMB("Введена неправильная капча!");
-                CapchaPB.Image = CreateCapcha(
-                    CapchaPB.Width,
-                    CapchaPB.Height);
-            }
+            //    if (PasswordPB.Password != user.PasswordUser && PasswordPB.IsEnabled)
+            //    {
+            //        k++;
+            //        if (k == 3)
+            //        {
+            //            PasswordPB.IsEnabled = false;
+            //            await Task.Delay(10000);
+            //            PasswordPB.IsEnabled = true;
+            //            k = 0;
+            //        }
+            //        else
+            //        {
+            //            MBClass.ErrorMB("Неправильный логин или пароль");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        switch (user.IdRole)
+            //        {
+            //            case 1:
+            //                new MainWindow().Show();
+            //                this.Close();
+            //                break;
+            //            case 2:
+            //                new AdminWindow().Show();
+            //                this.Close();
+            //                break;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    MBClass.ErrorMB("Введена неправильная капча!");
+            //    CapchaTB.Text = "";
+            //    CapchaPB.Focus();
+            //    CapchaPB.Image = CreateCapcha(
+            //        CapchaPB.Width,
+            //        CapchaPB.Height);
+            //}
         }
 
         private void PackIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -108,8 +117,8 @@ namespace VetAccounting.WindowFolder
             Random rnd = new Random();
             Bitmap result = new Bitmap(Width, Heigh);
 
-            int Xpos = rnd.Next(0, Width - 5);
-            int Ypos = rnd.Next(15, Heigh - 5);
+            int Xpos = rnd.Next(25, Width - 75);
+            int Ypos = rnd.Next(15, Heigh - 25);
 
             System.Drawing.Brush colors =
                 System.Drawing.Brushes.Black;
@@ -121,7 +130,7 @@ namespace VetAccounting.WindowFolder
 
             text = String.Empty;
 
-            string ALF = "1234567890qwertyuiopQWERTYUIOPasdfghjklASDFGHJKLzxcvbnmZXCVBNM";
+            string ALF = "1234567890";
 
             for (int i = 0; i < 5; i++)
             {

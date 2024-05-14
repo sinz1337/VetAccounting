@@ -19,5 +19,12 @@ namespace VetAccounting.DataFolder
         public string ManufacturerMedicines { get; set; }
         public string QuantityMedicines { get; set; }
         public string RemainsMedicines { get; set; }
+        public System.DateTime DateOfReceiptMedicines { get; set; }
+        public string ExpirationDateMedicines { get; set; }
+        public byte[] PhotoMedicines { get; set; }
+        public int IdStaff { get; set; }
+        public string InfoMedicines { get; set; }
+    
+        public virtual Staff Staff { get; set; }
     }
 }

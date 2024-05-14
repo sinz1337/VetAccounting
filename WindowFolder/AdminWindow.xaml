@@ -1,4 +1,4 @@
-﻿<Window x:Class="VetAccounting.WindowFolder.MainWindow"
+﻿<Window x:Class="VetAccounting.WindowFolder.AdminWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -57,8 +57,8 @@
                 <Image Source="/ResourseFolder/ImageFolder/Logo.png"
                        Height="47" Width="47"/>
 
-                <materialDesign:PackIcon x:Name="Medicine"
-                                         Kind="Pill" 
+                <materialDesign:PackIcon x:Name="Staff"
+                                         Kind="AccountGroup" 
                                          Grid.Row="2"
                                          Foreground="#242423"
                                          Height="41"
@@ -66,25 +66,9 @@
                                          VerticalAlignment="Center"
                                          HorizontalAlignment="Center"
                                          Cursor="Hand"
-                                         MouseLeftButtonDown="Medicine_MouseLeftButtonDown">
+                                         MouseLeftButtonDown="Staff_MouseLeftButtonDown">
                     <materialDesign:PackIcon.ToolTip>
-                        <ToolTip Content="Лекарства"
-                                 Style="{StaticResource ToolTip}"/>
-                    </materialDesign:PackIcon.ToolTip>
-                </materialDesign:PackIcon>
-
-                <materialDesign:PackIcon x:Name="Consumables"
-                                         Kind="LotionOutline"
-                                         Grid.Row="3"
-                                         Foreground="#242423"
-                                         Height="41"
-                                         Width="41"
-                                         VerticalAlignment="Center"
-                                         HorizontalAlignment="Center"
-                                         Cursor="Hand"
-                                         MouseLeftButtonDown="Consumables_MouseLeftButtonDown">
-                    <materialDesign:PackIcon.ToolTip>
-                        <ToolTip Content="Расходные материалы"
+                        <ToolTip Content="Сотрудники"
                                  Style="{StaticResource ToolTip}"/>
                     </materialDesign:PackIcon.ToolTip>
                 </materialDesign:PackIcon>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -23,9 +24,13 @@ namespace VetAccounting.PageFolder
     /// </summary>
     public partial class AddMedecinePage : Page
     {
+        public string selectedFileName = "";
+        byte[] Photo;
+        bool IsPhoto;
         public AddMedecinePage()
         {
             InitializeComponent();
+            StaffCB.ItemsSource = DBEntities.GetContext().Staff.ToList();
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
@@ -37,7 +42,12 @@ namespace VetAccounting.PageFolder
                     NameMedicines = NameTB.Text,
                     ManufacturerMedicines = ManufactureTB.Text,
                     QuantityMedicines = QantityTB.Text,
-                    RemainsMedicines = QantityTB.Text
+                    RemainsMedicines = QantityTB.Text,
+                    DateOfReceiptMedicines = DateTime.Now,
+                    ExpirationDateMedicines = ExpirationDateTB.Text,
+                    PhotoMedicines = Photo,
+                    InfoMedicines = InfoTB.Text,
+                    IdStaff = Int32.Parse(StaffCB.SelectedValue.ToString()),
                 };
                 DBEntities.GetContext().Medicines.Add(medecineAdd);
                 DBEntities.GetContext().SaveChanges();
@@ -48,6 +58,28 @@ namespace VetAccounting.PageFolder
             {
                 MessageBox.Show(ex.Message);
             }   
+        }
+
+        private void AddPhotoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.InitialDirectory = "";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                        "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                        "Portable Network Graphic (*.png)|*.png";
+
+            if (op.ShowDialog() == true)
+            {
+                selectedFileName = op.FileName;
+                Photo = ImageClass.ConvertImageToByteArray(selectedFileName);
+                PhotoImg.ImageSource = ImageClass.ConvertByteArrayToImage(Photo);
+                IsPhoto = true;
+            }
+            else
+            {
+                IsPhoto = false;
+                return;
+            }
         }
     }
 }

@@ -18,26 +18,26 @@ using VetAccounting.DataFolder;
 namespace VetAccounting.PageFolder
 {
     /// <summary>
-    /// Логика взаимодействия для MedicinePage.xaml
+    /// Логика взаимодействия для StaffPage.xaml
     /// </summary>
-    public partial class MedicinePage : Page
+    public partial class StaffPage : Page
     {
         DBEntities dBEntities = new DBEntities();
-        public MedicinePage()
+        public StaffPage()
         {
             InitializeComponent();
             ListLB.ItemsSource = DBEntities.GetContext()
-                .Medicines.ToList().OrderBy(a => a.NameMedicines);
-        }
-
-        private void AddBtn_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new AddMedecinePage());
+                .Staff.ToList().OrderBy(a => a.SurnameStaff);
         }
 
         private void SearchTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             RefreshData();
+        }
+
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddStaffPage());
         }
 
         private void EdidMI_Click(object sender, RoutedEventArgs e)
@@ -48,39 +48,26 @@ namespace VetAccounting.PageFolder
             }
             else
             {
-                Medicines medicines = ListLB.SelectedItem as Medicines;
+                Staff staff = ListLB.SelectedItem as Staff;
                 NavigationService.Navigate
-                    (new EditMedecinePage(ListLB.SelectedItem as Medicines));
+                    (new EditStaffPage(ListLB.SelectedItem as Staff));
             }
-        }
-
-        private void RefreshData()
-        {
-            List<Medicines> listMedicines = dBEntities.Medicines.ToList();
-
-            var searchString = SearchTB.Text;
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                listMedicines = listMedicines.Where(x => x.NameMedicines.ToLower().Contains(searchString.ToLower())).ToList();
-            }
-
-            ListLB.ItemsSource = listMedicines;
         }
 
         private void DeleteMI_Click(object sender, RoutedEventArgs e)
         {
-            var medicine = ListLB.SelectedItem as Medicines;
-            bool delete = MBClass.QuestionMB($"Вы действительно хотите удалить {medicine.NameMedicines}?");
+            var staff = ListLB.SelectedItem as Staff;
+            bool delete = MBClass.QuestionMB($"Вы действительно хотите удалить {staff.SurnameStaff}?");
             if (delete)
             {
                 try
                 {
                     DBEntities.GetContext()
-                        .Medicines.Remove(medicine);
+                        .Staff.Remove(staff);
                     DBEntities.GetContext().SaveChanges();
 
                     MBClass.InfoMB("Удалено!");
-                    NavigationService.Navigate(new MedicinePage());
+                    NavigationService.Navigate(new StaffPage());
                 }
                 catch (Exception ex)
                 {
@@ -88,6 +75,19 @@ namespace VetAccounting.PageFolder
                     return;
                 }
             }
+        }
+
+        private void RefreshData()
+        {
+            List<Staff> listStaff = dBEntities.Staff.ToList();
+
+            var searchString = SearchTB.Text;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                listStaff = listStaff.Where(x => x.SurnameStaff.ToLower().Contains(searchString.ToLower())).ToList();
+            }
+
+            ListLB.ItemsSource = listStaff;
         }
 
         private void PhotoMI_Click(object sender, RoutedEventArgs e)
@@ -98,9 +98,9 @@ namespace VetAccounting.PageFolder
             }
             else
             {
-                Medicines medicines = ListLB.SelectedItem as Medicines;
+                Staff staff = ListLB.SelectedItem as Staff;
                 NavigationService.Navigate
-                    (new PhotoMedicinePage(ListLB.SelectedItem as Medicines));
+                    (new PhotoStaffPage(ListLB.SelectedItem as Staff));
             }
         }
     }

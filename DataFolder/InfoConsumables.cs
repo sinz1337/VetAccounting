@@ -12,20 +12,10 @@ namespace VetAccounting.DataFolder
     using System;
     using System.Collections.Generic;
     
-    public partial class Consumables
+    public partial class InfoConsumables
     {
-        public int IdConsumables { get; set; }
-        public string NameConsumables { get; set; }
-        public string ManufacturerConsumables { get; set; }
-        public string QuantityConsumables { get; set; }
-        public string RemainsConsumables { get; set; }
-        public System.DateTime DateOfReceiptConsumables { get; set; }
-        public string ExpirationDateConsumables { get; set; }
-        public byte[] PhotoConsumables { get; set; }
-        public int IdStaff { get; set; }
-        public string InfoConsumables { get; set; }
-        public string SizeConsumables { get; set; }
-    
-        public virtual Staff Staff { get; set; }
+        public int IdInfoC { get; set; }
+        public string InfoC { get; set; }
+        public string SizeC { get; set; }
     }
 }

@@ -15,14 +15,20 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <TextBox x:Name="NameTB"
+                     Grid.Row="1"
                      Height="70"
                      Width="500"
                      Padding="13"
@@ -42,7 +48,7 @@
         </TextBox>
 
         <TextBox x:Name="ManufactureTB"
-                     Grid.Row="1"
+                     Grid.Row="2"
                      Height="70"
                      Width="500"
                      Padding="13"
@@ -62,7 +68,7 @@
         </TextBox>
 
         <TextBox x:Name="QantityTB"
-                     Grid.Row="2"
+                     Grid.Row="3"
                      Height="70"
                      Width="500"
                      Padding="13"
@@ -81,8 +87,97 @@
             </TextBox.Resources>
         </TextBox>
 
+        <TextBox x:Name="ExpirationDateTB"
+                     Grid.Row="4"
+                     Height="70"
+                     Width="500"
+                     Padding="13"
+                     BorderBrush="#242423"
+                     BorderThickness="2"
+                     Foreground="#242423"
+                     CaretBrush="#242423"
+                     materialDesign:HintAssist.Hint="Срок годности"    
+                     materialDesign:HintAssist.FloatingOffset="7,-30"
+                     materialDesign:HintAssist.Background="#E8EDDF"
+                     materialDesign:HintAssist.Foreground="#242423"
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                     Style="{StaticResource TextBox}">
+            <TextBox.Resources>
+                <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#242423"/>
+            </TextBox.Resources>
+        </TextBox>
+
+        <ComboBox x:Name="StaffCB"
+                  Grid.Row="5"
+                  SelectedItem="{Binding Staff}"
+                  SelectedValuePath="IdStaff"
+                  DisplayMemberPath="SurnameStaff"
+                  IsEnabled="True"
+                  BorderBrush="#242423"
+                  Height="70"
+                  Width="500"
+                  materialDesign:HintAssist.Hint="Сотрудник"
+                  materialDesign:HintAssist.Background="#E8EDDF"
+                  materialDesign:HintAssist.FloatingOffset="7,-30"
+                  materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                  Style="{StaticResource ComboBox}"/>
+
+        <TextBox x:Name="InfoTB"
+                     Grid.Row="6"
+                     Height="140"
+                     TextWrapping="Wrap"
+                     Width="500"
+                     Padding="13"
+                     BorderBrush="#242423"
+                     BorderThickness="2"
+                     Foreground="#242423"
+                     CaretBrush="#242423"
+                     materialDesign:HintAssist.Hint="Информация"    
+                     materialDesign:HintAssist.FloatingOffset="7,-65"
+                     materialDesign:HintAssist.Background="#E8EDDF"
+                     materialDesign:HintAssist.Foreground="#242423"
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                     Style="{StaticResource TextBox}">
+            <TextBox.Resources>
+                <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#242423"/>
+            </TextBox.Resources>
+        </TextBox>
+
+        <TextBox x:Name="SizeTB"
+                     Grid.Row="7"
+                     Height="70"
+                     Width="500"
+                     Padding="13"
+                     BorderBrush="#242423"
+                     BorderThickness="2"
+                     Foreground="#242423"
+                     CaretBrush="#242423"
+                     materialDesign:HintAssist.Hint="Размер"    
+                     materialDesign:HintAssist.FloatingOffset="7,-30"
+                     materialDesign:HintAssist.Background="#E8EDDF"
+                     materialDesign:HintAssist.Foreground="#242423"
+                     materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                     Style="{StaticResource TextBox}">
+            <TextBox.Resources>
+                <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#242423"/>
+            </TextBox.Resources>
+        </TextBox>
+
+        <Border x:Name="BorderForImg"
+                Grid.Column="1"
+                Grid.Row="1"
+                Grid.RowSpan="6"
+                Height="350"
+                Width="500"
+                CornerRadius="12">
+            <Border.Background>
+                <ImageBrush x:Name="PhotoImg"/>
+            </Border.Background>
+        </Border>
+
+
         <Button x:Name="AddBtn"
-                Grid.Row="3"
+                Grid.Row="8"
                 Height="70"
                 Width="500"
                 Content="Добавить"
@@ -92,6 +187,19 @@
                 materialDesign:ButtonAssist.CornerRadius="35"
                 Style="{StaticResource Button}"
                 Click="AddBtn_Click"/>
+
+        <Button x:Name="AddPhotoBtn"
+                Grid.Row="8"
+                Grid.Column="1"
+                Height="70"
+                Width="500"
+                Content="Добавить фото"
+                FontSize="35"
+                Background="#242423"
+                Foreground="#F5CB5C"
+                materialDesign:ButtonAssist.CornerRadius="35"
+                Style="{StaticResource Button}"
+                Click="AddPhotoBtn_Click"/>
 
     </Grid>
 </Page>

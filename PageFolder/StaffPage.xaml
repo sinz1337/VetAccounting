@@ -1,4 +1,4 @@
-﻿<Page x:Class="VetAccounting.PageFolder.MedicinePage"
+﻿<Page x:Class="VetAccounting.PageFolder.StaffPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="1010" d:DesignWidth="1739"
-      Title="Лекарства">
+      Title="Сотрудники">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1350"/>
@@ -57,7 +57,7 @@
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="PhotoMI"
-                              Header="Подробная информация"
+                              Header="Увеличить фото"
                               Click="PhotoMI_Click"/>
                     <MenuItem Header="Редактирование"
                               x:Name="EdidMI"
@@ -91,57 +91,41 @@
                                    TextWrapping="WrapWithOverflow"
                                    VerticalAlignment="Center"
                                    FontWeight="Bold"
-                                   Text="{Binding NameMedicines,
-                                          StringFormat={} Название: {0}}"
-                                   Style="{StaticResource TextBlock}"/>
+                                   Text="{Binding SurnameStaff,
+                                          StringFormat={} Фамилия: {0}}"
+                                   Style="{StaticResource TextBlock}" Cursor=""/>
 
                         <TextBlock Grid.Row="1"
                                    Grid.Column="2"
                                    VerticalAlignment="Center"
-                                   Text="{Binding ManufacturerMedicines,
-                                          StringFormat={} Производитель: {0}}"
+                                   Text="{Binding NameStaff,
+                                          StringFormat={} Имя: {0}}"
                                    Style="{StaticResource TextBlock}"/>
 
                         <TextBlock Grid.Row="0"
                                    Grid.Column="4"
                                    VerticalAlignment="Center"
-                                   Text="{Binding QuantityMedicines,
-                                          StringFormat={} Количество: {0} шт.}"
+                                   Text="{Binding MiddleNameStaff,
+                                          StringFormat={} Отчество: {0}р}"
                                    Style="{StaticResource TextBlock}"/>
 
                         <TextBlock Grid.Row="1"
                                    Grid.Column="4"
                                    VerticalAlignment="Center"
-                                   Text="{Binding RemainsMedicines,
-                                          StringFormat={} Остаток: {0} шт.}"
-                                   Style="{StaticResource TextBlock}"/>
-
-                        <TextBlock Grid.Row="0"
-                                   Grid.Column="6"
-                                   VerticalAlignment="Center"
-                                   Style="{StaticResource TextBlock}">
-                            <Run Text="Дата поступления: "/>
-                            <Run Text="{Binding DateOfReceiptMedicines, StringFormat=dd.MM.yyyy}"/>
-                        </TextBlock>
-
-                        <TextBlock Grid.Row="0"
-                                   Grid.Column="8"
-                                   VerticalAlignment="Center"
-                                   Style="{StaticResource TextBlock}">
-                            <Run Text="Принял: "
-                                 FontWeight="Bold"/>
-                            <Run Text="{Binding Staff.SurnameStaff}"/>
-                            <Run Text="{Binding Staff.NameStaff}"/>
-                        </TextBlock>
-
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="6"
-                                   VerticalAlignment="Center"
-                                   Text="{Binding ExpirationDateMedicines,
-                                          StringFormat={} Срок годности: {0} дней}"
+                                   Text="{Binding NumberStaff,
+                                          StringFormat={} Номер телефона: {0}}"
                                    Style="{StaticResource TextBlock}"/>
                         
-                        <Image Source="{Binding PhotoMedicines}"
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="6"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource TextBlock}">
+                            <Run Text="Роль: "
+                                 FontWeight="Bold"/>
+                            <Run Text="{Binding Role.NameRole}"/>
+                        </TextBlock>
+
+                        <Image Source="{Binding PhotoStaff}"
                                Width="200"
                                Height="100"
                                Grid.Column="0"

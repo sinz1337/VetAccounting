@@ -67,5 +67,42 @@ namespace VetAccounting.PageFolder
 
             ListLB.ItemsSource = listConsumables;
         }
+
+        private void DeleteMI_Click(object sender, RoutedEventArgs e)
+        {
+            var consumables = ListLB.SelectedItem as Consumables;
+            bool delete = MBClass.QuestionMB($"Вы действительно хотите удалить {consumables.NameConsumables}?");
+            if (delete)
+            {
+                try
+                {
+                    DBEntities.GetContext()
+                        .Consumables.Remove(consumables);
+                    DBEntities.GetContext().SaveChanges();
+
+                    MBClass.InfoMB("Удалено!");
+                    NavigationService.Navigate(new ConsumablesPage());
+                }
+                catch (Exception ex)
+                {
+                    MBClass.ErrorMB(ex.Message);
+                    return;
+                }
+            }
+        }
+
+        private void PhotoMI_Click(object sender, RoutedEventArgs e)
+        {
+            if (ListLB.SelectedItem == null)
+            {
+                MBClass.ErrorMB("Выберите объект");
+            }
+            else
+            {
+                Consumables consumables = ListLB.SelectedItem as Consumables;
+                NavigationService.Navigate
+                    (new PhotoConsumablesPage(ListLB.SelectedItem as Consumables));
+            }
+        }
     }
 }

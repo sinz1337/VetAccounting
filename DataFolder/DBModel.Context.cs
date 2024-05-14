@@ -26,8 +26,12 @@ namespace VetAccounting.DataFolder
         }
     
         public virtual DbSet<Consumables> Consumables { get; set; }
+        public virtual DbSet<InfoConsumables> InfoConsumables { get; set; }
+        public virtual DbSet<InfoMedicines> InfoMedicines { get; set; }
         public virtual DbSet<Medicines> Medicines { get; set; }
         public virtual DbSet<Purchase> Purchase { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<Staff> Staff { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Type> Type { get; set; }
         public virtual DbSet<User> User { get; set; }

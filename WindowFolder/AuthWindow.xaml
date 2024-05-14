@@ -41,6 +41,13 @@
                    Grid.Row="1"
                    Style="{StaticResource LabelLogo}"/>
 
+            <Image Source="/ResourseFolder/ImageFolder/Logo.png" 
+                   Grid.Column="1" Grid.Row="1"
+                   Height="40"
+                   Width="40"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"/>
+
             <materialDesign:PackIcon Kind="Close" 
                                      Width="24"
                                      Height="24"
@@ -147,22 +154,6 @@
                     materialDesign:ButtonAssist.CornerRadius="20"
                     Style="{StaticResource Button}"
                     Click="LoginBtn_Click"/>
-
-            <CheckBox x:Name="StayInCB"
-                      Content="Не выходить"
-                      Grid.Column="1"
-                      Grid.Row="9"
-                      VerticalAlignment="Top"
-                      Margin="0,45,0,0"
-                      materialDesign:CheckBoxAssist.CheckBoxSize="20"
-                      Style="{StaticResource CheckBox}">
-                <CheckBox.Resources>
-                    <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" 
-                                     Color="#F5CB5C"/>
-                    <SolidColorBrush x:Key="PrimaryHueMidBrush" 
-                                     Color="#F5CB5C"/>
-                </CheckBox.Resources>
-            </CheckBox>
         </Grid>
     </Border>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -8,7 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using Microsoft.Win32;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -20,44 +20,40 @@ using VetAccounting.DataFolder;
 namespace VetAccounting.PageFolder
 {
     /// <summary>
-    /// Логика взаимодействия для AddConsumablePage.xaml
+    /// Логика взаимодействия для AddStaffPage.xaml
     /// </summary>
-    public partial class AddConsumablePage : Page
+    public partial class AddStaffPage : Page
     {
         public string selectedFileName = "";
         byte[] Photo;
         bool IsPhoto;
-        public AddConsumablePage()
+        public AddStaffPage()
         {
             InitializeComponent();
-            StaffCB.ItemsSource = DBEntities.GetContext().Staff.ToList();
+            RoleCB.ItemsSource = DBEntities.GetContext().Role.ToList();
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var consumableAdd = new Consumables()
+                var staffAdd = new Staff()
                 {
-                    NameConsumables = NameTB.Text,
-                    ManufacturerConsumables = ManufactureTB.Text,
-                    QuantityConsumables = QantityTB.Text,
-                    RemainsConsumables = QantityTB.Text,
-                    DateOfReceiptConsumables = DateTime.Now,
-                    ExpirationDateConsumables = ExpirationDateTB.Text,
-                    PhotoConsumables = Photo,
-                    InfoConsumables = InfoTB.Text,
-                    SizeConsumables = SizeTB.Text,
-                    IdStaff = Int32.Parse(StaffCB.SelectedValue.ToString()),
+                    NameStaff = NameTB.Text,
+                    SurnameStaff = SurnameTB.Text,
+                    MiddleNameStaff = MiddleNameTB.Text,
+                    NumberStaff = NumberTB.Text,
+                    PhotoStaff = Photo,
+                    IdRole = Int32.Parse(RoleCB.SelectedValue.ToString()),
                 };
-                DBEntities.GetContext().Consumables.Add(consumableAdd);
+                DBEntities.GetContext().Staff.Add(staffAdd);
                 DBEntities.GetContext().SaveChanges();
                 MBClass.InfoMB("Добавленно");
-                NavigationService.Navigate(new ConsumablesPage());
+                NavigationService.Navigate(new StaffPage());
             }
             catch (DbEntityValidationException ex)
             {
-                MBClass.ErrorMB(ex);
+                MessageBox.Show(ex.Message);
             }
         }
 

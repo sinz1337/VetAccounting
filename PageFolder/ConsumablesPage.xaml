@@ -56,15 +56,27 @@
                  Grid.ColumnSpan="3">
             <ListBox.ContextMenu>
                 <ContextMenu>
+                    <MenuItem x:Name="PhotoMI"
+                              Header="Подробная информация"
+                              Click="PhotoMI_Click"/>
                     <MenuItem x:Name="EditMI"
                               Header="Редактировать"
                               Click="EditMI_Click"/>
+                    <MenuItem x:Name="DeleteMI"
+                              Header="Удалить"
+                              Click="DeleteMI_Click"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="50"/>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition/>
@@ -75,7 +87,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0"
-                                   Grid.Column="0"
+                                   Grid.Column="2"
                                    TextWrapping="WrapWithOverflow"
                                    VerticalAlignment="Center"
                                    FontWeight="Bold"
@@ -84,29 +96,60 @@
                                    Style="{StaticResource TextBlock}"/>
 
                         <TextBlock Grid.Row="1"
-                                   Grid.Column="0"
+                                   Grid.Column="2"
                                    VerticalAlignment="Center"
                                    Text="{Binding ManufacturerConsumables,
                                           StringFormat={} Производитель: {0}}"
                                    Style="{StaticResource TextBlock}"/>
 
                         <TextBlock Grid.Row="0"
-                                   Grid.Column="2"
+                                   Grid.Column="4"
                                    VerticalAlignment="Center"
                                    Text="{Binding QuantityConsumables,
                                           StringFormat={} Количество: {0}}"
                                    Style="{StaticResource TextBlock}"/>
 
                         <TextBlock Grid.Row="1"
-                                   Grid.Column="2"
+                                   Grid.Column="4"
                                    VerticalAlignment="Center"
                                    Text="{Binding RemainsConsumables,
                                           StringFormat={} Остаток: {0}}"
                                    Style="{StaticResource TextBlock}"/>
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="6"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource TextBlock}">
+                            <Run Text="Дата поступления: "/>
+                            <Run Text="{Binding DateOfReceiptConsumables, StringFormat=dd.MM.yyyy}"/>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="6"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding ExpirationDateConsumables,
+                                          StringFormat={} Срок годности: {0} дней}"
+                                   Style="{StaticResource TextBlock}"/>
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="8"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource TextBlock}">
+                            <Run Text="Принял: "
+                                 FontWeight="Bold"/>
+                            <Run Text="{Binding Staff.SurnameStaff}"/>
+                            <Run Text="{Binding Staff.NameStaff}"/>
+                        </TextBlock>
+
+                        <Image Source="{Binding PhotoConsumables}"
+                               Width="200"
+                               Height="100"
+                               Grid.Column="0"
+                               Grid.RowSpan="2"
+                               Stretch="Uniform"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
     </Grid>
 </Page>

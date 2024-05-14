@@ -14,6 +14,27 @@
           <Property Name="ManufacturerConsumables" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="QuantityConsumables" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RemainsConsumables" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfReceiptConsumables" Type="date" Nullable="false" />
+          <Property Name="ExpirationDateConsumables" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhotoConsumables" Type="varbinary(max)" />
+          <Property Name="IdStaff" Type="int" Nullable="false" />
+          <Property Name="InfoConsumables" Type="nvarchar(max)" />
+          <Property Name="SizeConsumables" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="InfoConsumables">
+          <Key>
+            <PropertyRef Name="IdInfoC" />
+          </Key>
+          <Property Name="IdInfoC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InfoC" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SizeC" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="InfoMedicines">
+          <Key>
+            <PropertyRef Name="IdInfoM" />
+          </Key>
+          <Property Name="IdInfoM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InfoM" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Medicines">
           <Key>
@@ -24,16 +45,42 @@
           <Property Name="ManufacturerMedicines" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="QuantityMedicines" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RemainsMedicines" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfReceiptMedicines" Type="date" Nullable="false" />
+          <Property Name="ExpirationDateMedicines" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhotoMedicines" Type="varbinary(max)" />
+          <Property Name="IdStaff" Type="int" Nullable="false" />
+          <Property Name="InfoMedicines" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Purchase">
           <Key>
             <PropertyRef Name="IdPurchase" />
           </Key>
           <Property Name="IdPurchase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypePurchase" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ProvidePurchaser" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CostPurchase" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="StatysPurchase" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberProvidePurchase" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdStaff" Type="int" Nullable="false" />
+          <Property Name="IdType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="IdRole" />
+          </Key>
+          <Property Name="IdRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameRole" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="IdStaff" />
+          </Key>
+          <Property Name="IdStaff" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameStaff" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SurnameStaff" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleNameStaff" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberStaff" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+          <Property Name="PhotoStaff" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -49,7 +96,7 @@
           <Key>
             <PropertyRef Name="IdType" />
           </Key>
-          <Property Name="IdType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameType" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
@@ -59,14 +106,115 @@
           <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LoginUser" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PasswordUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Consumables_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Consumables" Type="Self.Consumables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="IdStaff" />
+            </Principal>
+            <Dependent Role="Consumables">
+              <PropertyRef Name="IdStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicines_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Medicines" Type="Self.Medicines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="IdStaff" />
+            </Principal>
+            <Dependent Role="Medicines">
+              <PropertyRef Name="IdStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchase_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="IdStaff" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="IdStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchase_Type1">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="IdRole" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="IdRole" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище DBModelContainer">
           <EntitySet Name="Consumables" EntityType="Self.Consumables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfoConsumables" EntityType="Self.InfoConsumables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfoMedicines" EntityType="Self.InfoMedicines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Medicines" EntityType="Self.Medicines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Consumables_Staff" Association="Self.FK_Consumables_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Consumables" EntitySet="Consumables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicines_Staff" Association="Self.FK_Medicines_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Medicines" EntitySet="Medicines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_Staff" Association="Self.FK_Purchase_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_Type1" Association="Self.FK_Purchase_Type1">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Role" Association="Self.FK_Staff_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -82,6 +230,28 @@
           <Property Name="ManufacturerConsumables" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="QuantityConsumables" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RemainsConsumables" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfReceiptConsumables" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ExpirationDateConsumables" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhotoConsumables" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdStaff" Type="Int32" Nullable="false" />
+          <Property Name="InfoConsumables" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SizeConsumables" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Consumables_Staff" FromRole="Consumables" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="InfoConsumables">
+          <Key>
+            <PropertyRef Name="IdInfoC" />
+          </Key>
+          <Property Name="IdInfoC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InfoC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SizeC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InfoMedicines">
+          <Key>
+            <PropertyRef Name="IdInfoM" />
+          </Key>
+          <Property Name="IdInfoM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InfoM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="Medicines">
           <Key>
@@ -92,16 +262,51 @@
           <Property Name="ManufacturerMedicines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="QuantityMedicines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RemainsMedicines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfReceiptMedicines" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ExpirationDateMedicines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhotoMedicines" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdStaff" Type="Int32" Nullable="false" />
+          <Property Name="InfoMedicines" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Medicines_Staff" FromRole="Medicines" ToRole="Staff" />
         </EntityType>
         <EntityType Name="Purchase">
           <Key>
             <PropertyRef Name="IdPurchase" />
           </Key>
           <Property Name="IdPurchase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypePurchase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProvidePurchaser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CostPurchase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="StatysPurchase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberProvidePurchase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdStaff" Type="Int32" Nullable="false" />
+          <Property Name="IdType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Purchase_Staff" FromRole="Purchase" ToRole="Staff" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_Purchase_Type1" FromRole="Purchase" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="IdRole" />
+          </Key>
+          <Property Name="IdRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Role" FromRole="Role" ToRole="Staff" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="IdStaff" />
+          </Key>
+          <Property Name="IdStaff" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameStaff" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SurnameStaff" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleNameStaff" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberStaff" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
+          <Property Name="PhotoStaff" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Consumables" Relationship="Self.FK_Consumables_Staff" FromRole="Staff" ToRole="Consumables" />
+          <NavigationProperty Name="Medicines" Relationship="Self.FK_Medicines_Staff" FromRole="Staff" ToRole="Medicines" />
+          <NavigationProperty Name="Purchase" Relationship="Self.FK_Purchase_Staff" FromRole="Staff" ToRole="Purchase" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Staff_Role" FromRole="Staff" ToRole="Role" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -117,8 +322,9 @@
           <Key>
             <PropertyRef Name="IdType" />
           </Key>
-          <Property Name="IdType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Purchase" Relationship="Self.FK_Purchase_Type1" FromRole="Type" ToRole="Purchase" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -127,14 +333,116 @@
           <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LoginUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PasswordUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
+        <Association Name="FK_Consumables_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Consumables" Type="Self.Consumables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="IdStaff" />
+            </Principal>
+            <Dependent Role="Consumables">
+              <PropertyRef Name="IdStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicines_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Medicines" Type="Self.Medicines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="IdStaff" />
+            </Principal>
+            <Dependent Role="Medicines">
+              <PropertyRef Name="IdStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchase_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="IdStaff" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="IdStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchase_Type1">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="IdRole" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="IdRole" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Consumables" EntityType="Self.Consumables" />
+          <EntitySet Name="InfoConsumables" EntityType="Self.InfoConsumables" />
+          <EntitySet Name="InfoMedicines" EntityType="Self.InfoMedicines" />
           <EntitySet Name="Medicines" EntityType="Self.Medicines" />
           <EntitySet Name="Purchase" EntityType="Self.Purchase" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Type" EntityType="Self.Type" />
           <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Consumables_Staff" Association="Self.FK_Consumables_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Consumables" EntitySet="Consumables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicines_Staff" Association="Self.FK_Medicines_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Medicines" EntitySet="Medicines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_Staff" Association="Self.FK_Purchase_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_Type1" Association="Self.FK_Purchase_Type1">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Role" Association="Self.FK_Staff_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -150,6 +458,29 @@
                 <ScalarProperty Name="ManufacturerConsumables" ColumnName="ManufacturerConsumables" />
                 <ScalarProperty Name="QuantityConsumables" ColumnName="QuantityConsumables" />
                 <ScalarProperty Name="RemainsConsumables" ColumnName="RemainsConsumables" />
+                <ScalarProperty Name="DateOfReceiptConsumables" ColumnName="DateOfReceiptConsumables" />
+                <ScalarProperty Name="ExpirationDateConsumables" ColumnName="ExpirationDateConsumables" />
+                <ScalarProperty Name="PhotoConsumables" ColumnName="PhotoConsumables" />
+                <ScalarProperty Name="IdStaff" ColumnName="IdStaff" />
+                <ScalarProperty Name="InfoConsumables" ColumnName="InfoConsumables" />
+                <ScalarProperty Name="SizeConsumables" ColumnName="SizeConsumables" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfoConsumables">
+            <EntityTypeMapping TypeName="DBModel.InfoConsumables">
+              <MappingFragment StoreEntitySet="InfoConsumables">
+                <ScalarProperty Name="IdInfoC" ColumnName="IdInfoC" />
+                <ScalarProperty Name="InfoC" ColumnName="InfoC" />
+                <ScalarProperty Name="SizeC" ColumnName="SizeC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfoMedicines">
+            <EntityTypeMapping TypeName="DBModel.InfoMedicines">
+              <MappingFragment StoreEntitySet="InfoMedicines">
+                <ScalarProperty Name="IdInfoM" ColumnName="IdInfoM" />
+                <ScalarProperty Name="InfoM" ColumnName="InfoM" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -161,6 +492,11 @@
                 <ScalarProperty Name="ManufacturerMedicines" ColumnName="ManufacturerMedicines" />
                 <ScalarProperty Name="QuantityMedicines" ColumnName="QuantityMedicines" />
                 <ScalarProperty Name="RemainsMedicines" ColumnName="RemainsMedicines" />
+                <ScalarProperty Name="DateOfReceiptMedicines" ColumnName="DateOfReceiptMedicines" />
+                <ScalarProperty Name="ExpirationDateMedicines" ColumnName="ExpirationDateMedicines" />
+                <ScalarProperty Name="PhotoMedicines" ColumnName="PhotoMedicines" />
+                <ScalarProperty Name="IdStaff" ColumnName="IdStaff" />
+                <ScalarProperty Name="InfoMedicines" ColumnName="InfoMedicines" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -168,10 +504,33 @@
             <EntityTypeMapping TypeName="DBModel.Purchase">
               <MappingFragment StoreEntitySet="Purchase">
                 <ScalarProperty Name="IdPurchase" ColumnName="IdPurchase" />
-                <ScalarProperty Name="TypePurchase" ColumnName="TypePurchase" />
                 <ScalarProperty Name="ProvidePurchaser" ColumnName="ProvidePurchaser" />
                 <ScalarProperty Name="CostPurchase" ColumnName="CostPurchase" />
                 <ScalarProperty Name="StatysPurchase" ColumnName="StatysPurchase" />
+                <ScalarProperty Name="NumberProvidePurchase" ColumnName="NumberProvidePurchase" />
+                <ScalarProperty Name="IdStaff" ColumnName="IdStaff" />
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="DBModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="NameRole" ColumnName="NameRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="DBModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="IdStaff" ColumnName="IdStaff" />
+                <ScalarProperty Name="NameStaff" ColumnName="NameStaff" />
+                <ScalarProperty Name="SurnameStaff" ColumnName="SurnameStaff" />
+                <ScalarProperty Name="MiddleNameStaff" ColumnName="MiddleNameStaff" />
+                <ScalarProperty Name="NumberStaff" ColumnName="NumberStaff" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="PhotoStaff" ColumnName="PhotoStaff" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -200,6 +559,7 @@
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
                 <ScalarProperty Name="PasswordUser" ColumnName="PasswordUser" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

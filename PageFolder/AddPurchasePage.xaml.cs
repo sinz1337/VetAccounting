@@ -26,6 +26,8 @@ namespace VetAccounting.PageFolder
         public AddPurchasePage()
         {
             InitializeComponent();
+            StaffCB.ItemsSource = DBEntities.GetContext().Staff.ToList();
+            TypeCB.ItemsSource = DBEntities.GetContext().Type.ToList();
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
@@ -34,10 +36,12 @@ namespace VetAccounting.PageFolder
             {
                 var purchaseAdd = new Purchase()
                 {
-                    TypePurchase = TypeTB.Text,
                     ProvidePurchaser = ProviderTB.Text,
                     CostPurchase = CostTB.Text,
-                    StatysPurchase = "В сборке"
+                    StatysPurchase = "В сборке",
+                    NumberProvidePurchase = NumberTB.Text,
+                    IdStaff = Int32.Parse(StaffCB.SelectedValue.ToString()),
+                    IdType = Int32.Parse(TypeCB.SelectedValue.ToString()),
                 };
                 DBEntities.GetContext().Purchase.Add(purchaseAdd);
                 DBEntities.GetContext().SaveChanges();
